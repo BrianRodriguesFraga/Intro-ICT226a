@@ -17,44 +17,86 @@ namespace Calculatrice
 
         static void Main(string[] args)
         {
+            #region nombre1
+            Console.Write("Entrée le premier nombre : ");
+            bool reussi1 = double.TryParse(Console.ReadLine(), out op1);
+            if (!reussi1)
+            {
+                do
+                {
+                    Console.Write("Le nombre entré est incorrect, réessayer : ");
+                    reussi1 = double.TryParse(Console.ReadLine(), out op1);
+                } while (!reussi1);
+            }
+            #endregion nombre1
 
-            Console.Write("Entrée le premier nombre : \n");
-            op1 = int.Parse(Console.ReadLine());
+            Console.Write("\nEntrée l'opérateur : ");
+            ope = (char)Console.ReadKey().KeyChar;
+            Console.ReadLine();
 
-            Console.Write("\n\nEntrée l'opérateur : \n");
-            ope = (char)Console.Read();
+            #region nombre2
+            Console.Write("\nEntrée le deuxième nombre : ");
+            bool reussi2 = double.TryParse(Console.ReadLine(), out op2);
+            if (!reussi2)
+            {
+                do
+                {
+                    Console.Write("Le nombre entré est incorrect, réessayer : ");
+                    reussi2 = double.TryParse(Console.ReadLine(), out op2);
+                } while (!reussi2);
+            }
+            #endregion nombre2
 
-            Console.Write("\n\nEntrée le second nombre : \n");
-            op2 = int.Parse(Console.ReadLine());
-
-            resultat = op1 + ope + op2;
+            #region operateur
+            if (ope == '+')
+            {
+                resultat = addi(op1, op2);
+            }
+            else if (ope == '-')
+            {
+                resultat = sous(op1, op2);
+            }
+            else if (ope == '*')
+            {
+                resultat = mult(op1, op2);
+            }
+            else if (ope == '/')
+            {
+                resultat = divi(op1, op2);
+            }
+            else
+            {
+                Console.Write("\n\n  L'opérateur entrée est incorrect ! -> " + ope + "\n");
+                resultat = 0;
+                Console.ReadLine();
+                return;
+            }
+            #endregion operateur
 
             Console.Write("\n\nLe résultat est : " + resultat);
-
             Console.ReadLine();
         }
-
-        private static int addi(int re1, int re2)
+        #region calcul
+        private static double addi(double re1, double re2)
         {
             return re1 + re2;
         }
 
-        private static int sous(int re1, int re2)
+        private static double sous(double re1, double re2)
         {
             return re1 - re2;
         }
 
-        private static int mult(int re1, int re2)
+        private static double mult(double re1, double re2)
         {
             return re1 * re2;
         }
 
-        private static double divi(int re1, int re2)
+        private static double divi(double re1, double re2)
         {
-            
             return re1 / re2;
         }
-
+        #endregion calcul
     }
 }
 
